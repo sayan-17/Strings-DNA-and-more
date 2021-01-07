@@ -1,0 +1,28 @@
+#BlueJ class context
+comment0.target=StringLastQuiz
+comment1.params=dna\ cursor
+comment1.target=int\ findStartCodon(java.lang.String,\ int)
+comment10.params=
+comment10.target=void\ noOfGenes()
+comment11.params=store
+comment11.target=void\ displayStore(edu.duke.StorageResource)
+comment2.params=dna\ startIndex\ stopCodon
+comment2.target=int\ findStopCodon(java.lang.String,\ int,\ java.lang.String)
+comment2.text=private\ int\ findStopCodon\ (String\ dna,\ int\ startIndex,\ String\ stopCodon){\r\n\ \ \ \ \ \ \ \ if\ (dna.isEmpty())\ \ \r\n\ \ \ \ \ \ \ \ \ \ \ \ return\ -1;\r\n\ \ \ \ \ \ \ \ int\ len,\ endIndex,\ cursor\ \=\ startIndex\ +\ 3;\r\n\ \ \ \ \ \ \ \ Boolean\ checkFlag\ \=\ true;\r\n\ \ \ \ \ \ \ \ len\ \=\ dna.length();\r\n\ \ \ \ \ \ \ \ cursor\ \=\ startIndex;\r\n\ \ \ \ \ \ \ \ while\ (len\ -\ cursor\ >\=\ (6-1)){\r\n\ \ \ \ \ \ \ \ \ \ \ \ endIndex\ \=\ dna.indexOf(stopCodon,\ cursor\ +\ codonLen);\r\n\ \ \ \ \ \ \ \ \ \ \ \ if\ (endIndex\ \=\=\ -1){\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ checkFlag\ \=\ false;\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ break;\r\n\ \ \ \ \ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ \ \ \ \ if\ ((endIndex\ -\ startIndex)\ %\ codonLen\ \=\=\ 0)\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ endIndex;\r\n\ \ \ \ \ \ \ \ \ \ \ \ cursor\ \=\ endIndex\ +\ codonLen;\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ if\ (checkFlag)\r\n\ \ \ \ \ \ \ \ \ \ \ \ return\ cursor;\r\n\ \ \ \ \ \ \ \ return\ -1;\r\n}
+comment3.params=dna\ cursor
+comment3.target=java.lang.String\ findGene(java.lang.String,\ int)
+comment3.text=private\ String\ findGene\ (String\ dna,\ int\ cursor){\r\n\ \ \ \ \ \ \ \ if\ (dna.isEmpty())\ \ \ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ \ \ \ \ return\ "";\r\n\ \ \ \ \ \ \ \ int\ startIndex,\ endIndexTAA,\ endIndexTGA,\ endIndexTAG,\ minimun;\r\n\ \ \ \ \ \ \ \ System.out.println("I\ am\ here\ in\ find\ gene");\r\n\ \ \ \ \ \ \ \ startIndex\ \=\ findStartCodon\ (dna,\ cursor);\r\n\ \ \ \ \ \ \ \ System.out.println("startindex\ \=\ "\ +\ startIndex);\r\n\ \ \ \ \ \ \ \ if\ (startIndex\ \=\=\ -1)\r\n\ \ \ \ \ \ \ \ \ \ \ \ return\ "";\r\n\ \ \ \ \ \ \ \ endIndexTAA\ \=\ findStopCodon(dna,\ startIndex,\ "TAA");\r\n\ \ \ \ \ \ \ \ endIndexTGA\ \=\ findStopCodon(dna,\ startIndex,\ "TGA");\r\n\ \ \ \ \ \ \ \ endIndexTAG\ \=\ findStopCodon(dna,\ startIndex,\ "TAG");;\r\n\ \ \ \ \ \ \ \ System.out.println("(taa,tga,tag)\ \ \=\ "\ +\ endIndexTAA\ +\ endIndexTGA\ +\ endIndexTAG);\r\n\ \ \ \ \ \ \ \ if(\ (endIndexTAA\ \!\=\ -1)\ &&\ ((endIndexTAA\ <\ endIndexTGA\ &&\ endIndexTGA\ \!\=\ -1)\ ||\ \r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (endIndexTAA\ <\ endIndexTAG\ &&\ endIndexTAG\ \!\=\ -1)\ ||\ (endIndexTGA\ \=\=\ -1\ &&\ endIndexTAG\ \=\=\ -1)\ )){\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ dna.substring\ (startIndex,\ endIndexTAA+3);}\r\n\ \ \ \ \ \ \ \ else\ if(\ (endIndexTGA\ \!\=\ -1)\ &&\ ((endIndexTGA\ <\ endIndexTAA\ &&\ endIndexTAA\ \!\=\ -1)\ ||\ \r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (endIndexTGA\ <\ endIndexTAG\ &&\ endIndexTAG\ \!\=\ -1)\ ||\ (endIndexTAA\ \=\=\ -1\ &&\ endIndexTAG\ \=\=\ -1)\ )\ ){\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ dna.substring\ (startIndex,\ endIndexTGA+3);}\r\n\ \ \ \ \ \ \ \ else\ if(\ (endIndexTAG\ \!\=\ -1)\ &&\ ((endIndexTAG\ <\ endIndexTAA\ &&\ endIndexTAA\ \!\=\ -1)\ ||\ \r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (endIndexTAG\ <\ endIndexTGA\ &&\ endIndexTGA\ \!\=\ -1)\ ||\ (endIndexTGA\ \=\=\ -1\ &&\ endIndexTAA\ \=\=\ -1)\ )\ ){\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ dna.substring\ (startIndex,\ endIndexTAG+3);}\r\n\ \ \ \ \ \ \ \ else\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ "";\r\n\ \ \ \ \ \ \ \ /*if(\ (taa\ \!\=\ -1)&&((taa\ <\ tag\ &&\ tag\ \!\=\ -1)||(taa\ <\ tga\ &&\ tga\ \!\=\ -1))\ )\r\n\ \ \ \ \ \ \ \ \ \ \ \ gene\ \=\ dna.substring(atg,taa+3);\r\n\ \ \ \ \ \ \ \ else\ if(\ (tga\ \!\=\ -1)&&((tga\ <\ tag\ &&\ tag\ \!\=\ -1)||(tga\ <\ taa\ &&\ taa\ \!\=\ -1))\ )\r\n\ \ \ \ \ \ \ \ \ \ \ \ gene\ \=\ dna.substring(atg,tga);\r\n\ \ \ \ \ \ \ \ else\ if(\ (tag\ \!\=\ -1)&&((tag\ <\ taa\ &&\ taa\ \!\=\ -1)||(tag\ <\ tga\ &&\ tga\ \!\=\ -1))\ )\r\n\ \ \ \ \ \ \ \ \ \ \ \ gene\ \=\ dna.substring(atg,tag);\r\n\ \ \ \ \ \ \ \ else\r\n\ \ \ \ \ \ \ \ \ \ \ \ gene\ \=\ "";\r\n\ \ \ \ \ \ \ \ \r\n}
+comment4.params=dna
+comment4.target=edu.duke.StorageResource\ storeAllGenes(java.lang.String)
+comment4.text=private\ StorageResource\ storeAllGenes(String\ dna){\r\n\ \ \ \ \ \ \ \ StorageResource\ store\ \=\ new\ StorageResource();\r\n\ \ \ \ \ \ \ \ int\ cursor\ \=\ 0,\ i\ \=1;\r\n\ \ \ \ \ \ \ \ while\ (true){\r\n\ \ \ \ \ \ \ \ \ \ \ \ String\ currentGene\ \=\ findGene\ (dna,\ cursor);\r\n\ \ \ \ \ \ \ \ \ \ \ \ if\ (currentGene.isEmpty())\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ break;\r\n\ \ \ \ \ \ \ \ \ \ \ \ if\ (store.contains(currentGene)){\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursor\ \=\ dna.indexOf(currentGene,\ cursor)\ +\ currentGene.length();\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ continue;\r\n\ \ \ \ \ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ \ \ \ \ System.out.println(i++\ +\ "\ "\ +\ currentGene);\r\n\ \ \ \ \ \ \ \ \ \ \ \ store.add(currentGene);\r\n\ \ \ \ \ \ \ \ \ \ \ \ cursor\ \=\ dna.indexOf(currentGene,\ cursor)\ +\ currentGene.length();\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ return\ store;\r\n}
+comment5.params=str
+comment5.target=void\ howManyGenes(edu.duke.StorageResource)
+comment6.params=dna
+comment6.target=double\ cgRatio(java.lang.String)
+comment7.params=str
+comment7.target=void\ geneGT60(edu.duke.StorageResource)
+comment8.params=str
+comment8.target=void\ geneGT35(edu.duke.StorageResource)
+comment9.params=dna\ codon
+comment9.target=void\ howManythisCodons(java.lang.String,\ java.lang.String)
+numComments=12
